@@ -1,5 +1,13 @@
 import { anthropicKeyAtom, groqKeyAtom, openAiKeyAtom } from "@/state/settings";
-import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import {
+  Button,
+  Callout,
+  Dialog,
+  Flex,
+  Text,
+  TextField,
+} from "@radix-ui/themes";
 import { useAtom } from "jotai";
 
 export const SettingsDialog = () => {
@@ -9,9 +17,18 @@ export const SettingsDialog = () => {
   return (
     <Dialog.Content maxWidth="450px">
       <Dialog.Title>Settings</Dialog.Title>
-      <Dialog.Description size="2" mb="4">
-        Set your API keys.
-      </Dialog.Description>
+
+      <Callout.Root mb="4" color="yellow">
+        <Callout.Icon>
+          <ExclamationTriangleIcon />
+        </Callout.Icon>
+        <Callout.Text>
+          Note: we do send your keys to a server when you press &quot;run&quot;
+          to generate a response so we can stream the result to the iframe. None
+          of your keys are persisted. If this makes you uncomfortable, you can
+          clone the repo and run it locally.
+        </Callout.Text>
+      </Callout.Root>
 
       <Flex direction="column" gap="3">
         <label>
