@@ -2,6 +2,12 @@
 
 [`develop.sh`](https://develop.sh) is an LLM prompt playground for visualizing the html output of llms. Most text playgrounds focus on the text output of the llm. This one focuses on the visual html output.
 
+
+
+https://github.com/SawyerHood/develop.sh/assets/2380669/d39efc1c-3279-416c-983b-a84bad900fce
+
+
+
 ## Features
 
 - **Multi-Model Support:** Seamlessly switch between OpenAI, Anthropic, and LLaMA models.
