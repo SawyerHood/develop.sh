@@ -14,6 +14,7 @@ import {
   Heading,
   IconButton,
   Popover,
+  Progress,
   Select,
   Slider,
   Spinner,
@@ -44,7 +45,7 @@ export function Prompt({ id }: { id: string }) {
   });
 
   return (
-    <Card style={{ position: "relative", margin: 12, flex: 1 }}>
+    <Card style={{ position: "relative", margin: "12px 0", flex: 1 }}>
       <form
         target={`output-${id}`}
         action="/api/html"
@@ -144,8 +145,8 @@ export function Prompt({ id }: { id: string }) {
           )}
           {iframeState === "loading" && (
             <Box position="relative">
-              <Box position="absolute" top="24px" left="12px">
-                <Spinner size="3" />
+              <Box position="absolute" top="8px" left="0" right="0">
+                <Progress duration="30s" />
               </Box>
             </Box>
           )}

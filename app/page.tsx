@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <Flex direction="column" style={{ height: "100vh" }} gap="10px">
       <Header />
-      <Flex direction="row" style={{ width: "100%", flexGrow: 1 }}>
+      <Flex direction="row" style={{ width: "100%", flexGrow: 1 }} gap="2">
         {prompts.map((prompt) => (
           <Prompt key={prompt.id} id={prompt.id} />
         ))}
