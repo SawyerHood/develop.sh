@@ -24,6 +24,7 @@ export async function POST(req: Request) {
           maxTokens,
           topP,
         });
+
         let programResult = "";
 
         let startedSending = false;
@@ -86,7 +87,7 @@ async function createProgramStream({
   maxTokens: number;
   topP: number;
 }) {
-  const params = {
+  const params: ChatCompletionCreateParamsStreaming = {
     messages: [
       {
         role: "system",
@@ -104,9 +105,9 @@ async function createProgramStream({
     stream: true,
   };
 
-  const stream = await createClient(key).chat.completions.create(
-    params as ChatCompletionCreateParamsStreaming
-  );
+  console.log(params);
+
+  const stream = await createClient(key).chat.completions.create(params);
 
   return stream;
 }
