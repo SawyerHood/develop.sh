@@ -45,8 +45,8 @@
 
 3. **Start experimenting with prompts!**
 
-## Contact
+## Upcoming Features
 
-For questions, suggestions, or issues, please open an issue on GitHub or contact us directly at [your.email@example.com](mailto:your.email@example.com).
-
-Happy prompting!
+- [ ] Support OpenRouter
+- [ ] Support Image inputs
+- [ ] Fullscreen output
