@@ -1,4 +1,9 @@
-import { GearIcon, PlayIcon, PlusIcon } from "@radix-ui/react-icons";
+import {
+  GearIcon,
+  GitHubLogoIcon,
+  PlayIcon,
+  PlusIcon,
+} from "@radix-ui/react-icons";
 import {
   Button,
   Card,
@@ -28,8 +33,14 @@ export function Header() {
       }}
     >
       <Heading size="4">develop.sh</Heading>
-      <IconButton
+      <a
         style={{ marginLeft: "auto" }}
+        className="rt-reset rt-BaseButton rt-r-size-2 rt-variant-ghost rt-IconButton"
+        href="https://github.com/sawyerhood/develop.sh"
+      >
+        <GitHubLogoIcon width={ICON_SIZE} height={ICON_SIZE} />
+      </a>
+      <IconButton
         variant="ghost"
         onClick={() => {
           dispatch({ type: "ADD_PROMPT" });

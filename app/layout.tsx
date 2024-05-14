@@ -8,8 +8,8 @@ import { ThemeProvider } from "next-themes";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "HTML Prompt Playground",
-  description: "Playground for HTML Prompt",
+  title: "develop.sh",
+  description: "Playground for HTML Prompting",
 };
 
 export default function RootLayout({
