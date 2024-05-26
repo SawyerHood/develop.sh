@@ -1,4 +1,5 @@
 import { createClient } from "@/ai/client";
+import { streamHtml } from "openai-html-stream";
 
 import { ChatCompletionCreateParamsStreaming } from "openai/resources/index.mjs";
 
@@ -12,62 +13,22 @@ export async function POST(req: Request) {
   const maxTokens = Number(formData.get("maxTokens")!);
   const topP = Number(formData.get("topP")!);
 
-  return new Response(
-    new ReadableStream({
-      async start(controller) {
-        const programStream = await createProgramStream({
-          system,
-          user,
-          model,
-          key,
-          temperature,
-          maxTokens,
-          topP,
-        });
+  const programStream = await createProgramStream({
+    system,
+    user,
+    model,
+    key,
+    temperature,
+    maxTokens,
+    topP,
+  });
 
-        let programResult = "";
-
-        let startedSending = false;
-        let sentIndex = 0;
-
-        for await (const chunk of programStream) {
-          const value = chunk.choices[0]?.delta?.content || "";
-
-          programResult += value;
-
-          if (startedSending) {
-            const match = programResult.match(/<\/html>/);
-            if (match) {
-              controller.enqueue(
-                programResult.slice(sentIndex, match.index! + match[0].length)
-              );
-              break;
-            } else {
-              controller.enqueue(value);
-              sentIndex = programResult.length;
-            }
-          } else {
-            const match = programResult.match(/<html/);
-            if (match) {
-              programResult =
-                "<!DOCTYPE html>\n" + programResult.slice(match.index!);
-              controller.enqueue(programResult);
-              sentIndex = programResult.length;
-              startedSending = true;
-            }
-          }
-        }
-        await new Promise((resolve) => setTimeout(resolve, 50));
-        controller.close();
-      },
-    }).pipeThrough(new TextEncoderStream()),
-    {
-      headers: {
-        "Content-Type": "text/html",
-      },
-      status: 200,
-    }
-  );
+  return new Response(streamHtml(programStream), {
+    headers: {
+      "Content-Type": "text/html",
+    },
+    status: 200,
+  });
 }
 
 async function createProgramStream({
